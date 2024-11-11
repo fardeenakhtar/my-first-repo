@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gradient generator</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: grid;
+      place-items: center;
+      margin-top: 180px;
+      background-image: linear-gradient(to right, #234af3, #786ce7);
+    }
+    .section-gradient {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+
+      & #btn1 {
+        background-color: #fdf589;
+      }
+      & #btn2 {
+        background-color: #93ffae;
+      }
+    }
+
+    #btn1 {
+      padding: 7px 15px;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.1s linear;
+      font-size: 17px;
+    }
+    #btn1:hover {
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+    #btn2 {
+      padding: 7px 15px;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.1s linear;
+      font-size: 17px;
+    }
+    #btn2:hover {
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+    .copy-text {
+      font-size: 17px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .copycode {
+      font-size: 16.5px;
+      font-family: Arial, Helvetica, sans-serif;
+      width: 300px;
+      text-align: center;
+      padding: 17px 13px;
+      border-top-left-radius: 13px;
+      border-bottom-left-radius: 13px;
+      background-color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+
+    .buttons2 {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+    }
+
+    #linear-btn {
+      padding: 0 10px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.1s linear;
+      font-size: 17px;
+    }
+    #linear-btn:hover {
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #radial-btn {
+      padding: 7px 15px;
+      border-radius: 45%;
+      border: none;
+      cursor: pointer;
+      transition: all 0.1s linear;
+      font-size: 17px;
+    }
+    #radial-btn:hover {
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  <body>
+    <section class="section-gradient">
+      <div class="buttons">
+        <button id="btn1">#234af3</button>
+        <button id="btn2">#786ce7</button>
+      </div>
+      <p class="copy-text">Click to copy code</p>
+      <div class="copycode">
+        background-image : linear-gradient(to right, #234af3, #786ce7);
+      </div>
+      <div class="buttons2">
+        <button id="linear-btn">Linear</button>
+        <button id="radial-btn">Radial</button>
+      </div>
+    </section>
+  </body>
+  <script>
+    // Access of HTML tags
+    let radialBtn = document.getElementById("radial-btn");
+    let linearBtn = document.getElementById("linear-btn");
+    let copyCode = document.querySelector(".copycode");
+
+    // function for radial gradient
+    let radialGradient = () => {
+      let btn1 = document.getElementById("btn1");
+      let btn2 = document.getElementById("btn2");
+      let rgb1 = "#3245cf";
+      let rgb2 = "#a3585b";
+      document.body.style.backgroundImage = `radial-gradient(circle, ${rgb1}, ${rgb2})`;
+      copyCode.innerHTML = `background-image : radial-gradient(circle, ${rgb1}, ${rgb2});`;
+      btn1.innerHTML = `${rgb1}`;
+      btn2.innerHTML = `${rgb2}`;
+
+      let hexValues = () => {
+        let color = "#";
+        let hexCode = "0123456789abcdef";
+        for (let i = 1; i <= 6; i++) {
+          color = color + hexCode[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+
+      let button1 = () => {
+        rgb1 = hexValues();
+        document.body.style.backgroundImage = `radial-gradient(circle, ${rgb1}, ${rgb2})`;
+        copyCode.innerHTML = `background-image : radial-gradient(circle, ${rgb1}, ${rgb2});`;
+        btn1.innerHTML = `${rgb1}`;
+      };
+
+      let button2 = () => {
+        rgb2 = hexValues();
+        document.body.style.backgroundImage = `radial-gradient(circle, ${rgb1}, ${rgb2})`;
+        copyCode.innerHTML = `background-image : radial-gradient(circle, ${rgb1}, ${rgb2});`;
+        btn2.innerHTML = `${rgb2}`;
+      };
+
+      btn1.addEventListener("click", button1);
+      btn2.addEventListener("click", button2);
+    };
+
+    // call to function of radialGradient
+    radialBtn.addEventListener("click", () => {
+      radialGradient();
+    });
+
+    // function for linear gradient
+    let linearGradient = () => {
+      let btn1 = document.getElementById("btn1");
+      let btn2 = document.getElementById("btn2");
+      let rgb1 = "#3245cf";
+      let rgb2 = "#a3585b";
+      let radial = "";
+
+      document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+      copyCode.innerHTML = `background-image : linear-gradient(to right, ${rgb1}, ${rgb2});`;
+      btn1.innerHTML = `${rgb1}`;
+      btn2.innerHTML = `${rgb2}`;
+
+      let hexValues = () => {
+        let color = "#";
+        let hexCode = "0123456789abcdef";
+        for (let i = 1; i <= 6; i++) {
+          color = color + hexCode[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+
+      let button1 = () => {
+        rgb1 = hexValues();
+        document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+        copyCode.innerHTML = `background-image : linear-gradient(to right, ${rgb1}, ${rgb2});`;
+        btn1.innerHTML = `${rgb1}`;
+      };
+
+      let button2 = () => {
+        rgb2 = hexValues();
+        document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+        copyCode.innerHTML = `background-image : linear-gradient(to right, ${rgb1}, ${rgb2});`;
+        btn2.innerHTML = `${rgb2}`;
+      };
+
+      btn1.addEventListener("click", button1);
+      btn2.addEventListener("click", button2);
+    };
+
+    // By default linear gradient
+    linearGradient();
+
+    // call to function of linearGradient
+    linearBtn.addEventListener("click", () => {
+      linearGradient();
+    });
+
+    // function to copy code in clipBoard
+    let clipBoard = () => {
+      window.navigator.clipboard.writeText(copyCode.innerText);
+      alert("Code Copied To Clipboard");
+    };
+    copyCode.addEventListener("click", clipBoard);
+  </script>
+</html>
